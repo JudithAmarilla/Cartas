@@ -41,17 +41,20 @@
     <footer>
         Con cariño,<br>
         💕 Tu novia<br><br>
-        *(Mientras leés, dejá que la canción hable también por mí, es muy emotiva porque expresa bien los sentimientos que quiero transmitirte...)*
+        *(Dejá que la canción hable también por mí, es muy emotiva porque expresa bien los sentimientos que quiero transmitirte...)*
     </footer>
     
-    <iframe 
-    src="https://www.youtube.com/embed/IpFX2vq8HKw?autoplay=1&loop=1&playlist=IpFX2vq8HKw&mute=0" 
-    frameborder="0" 
-    allow="autoplay; encrypted-media" 
-    style="position:absolute; left:-9999px; width:1px; height:1px;"
-></iframe>
+   <button onclick="playMusic()">🎵 Toca para reproducir</button>
 
-<p style="text-align:center; color: #888; font-size: 0.9em;">Si no escuchas la música, tocá la pantalla</p>
+    <audio id="bg-music" loop>
+        <source src="yung kai - blue.mp3" type="audio/mpeg">
+        
+    </audio>
+
+    <script>
+        function playMusic() {
+            var audio = document.getElementById('bg-music');
+            audio.play();
         
 </body>
 </html>
