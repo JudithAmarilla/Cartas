@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Para mi corazon 💕</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap);
+
+        * , ::before, ::after {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Quicksand", sans-serif;
+            background: linear-gradient(to bottom right, #ffecec, #fff5f5, #ffebeb);
+            color: #2e7d32;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem 40px 50px;
+            overflow: hidden;
+        }
+        .envelope {
+            --envelope-width: min(90vw, 600px);
+            position: relative;
+            width: var(--envelope-width);
+            height: 350px;
+            perspective: 1000px;
+            cursor: pointer;
+            margin-top: 50px;
+        }
+        .envelope-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+            transform: rotateY(180deg); /* Empieza mostrando la parte trasera */
+        }
+        .envelope-front,
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            backface-visibility: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            padding: 1rem;
+        }
+        .envelope-back {
+            background-color: #fdf6e3;
+            color: #2e7d32;
+            box-shadow: 0 0 15px rgba(0, 100, 0, 0.2);
+            transform: rotateY(0deg);
+        }
+        .emoji-letter {
+            font-size: 12rem;
+            line-height: 1;
+            user-select: none;
+            height: 100%;
+            width: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .envelope-front {
+            background-color: #d14d44;
+            color: #fff;
+            transform: rotateY(180deg);
+        }
+        .postage-stamp {
+            position: absolute;
+            top: 1em;
+            right: 0.5em;
+            width: 15%;
+        }
+        .address {
+            text-align: left;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        /* Carta pantalla completa con animación de desliz */
+        .letter-full {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #fdf6e3;
+            color: #2e7d32;
+            padding: 2rem;
+            overflow-y: auto;
+            z-index: 999;
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: all 1s ease;
+            pointer-events: none; /* Desactivado hasta que aparezca */
+        }
+        .letter-full.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .letter-full h1 {
+            text-align: center;
+            color: #1b5e20;
+            margin-top: 0;
+        }
+        .letter-full p {
+            max-width: 800px;
+            margin: 1rem auto;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .letter-full footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-style: italic;
+            font-weight: 600;
+            color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <!-- SOBRE -->
+    <div class="envelope" id="envelope">
+        <div class="envelope-inner" id="envelopeInner">
+            <div class="envelope-front">
+                <div class="postage-stamp">📬</div>
+                <div class="address">
+                    <p><span>Para:</span> <span>Mi Amor</span></p>
+                    <p><span>De:</span> <span>Tu Novia</span></p>
+                </div>
+                Abre la carta
+            </div>
+            <div class="envelope-back">
+                <div class="emoji-letter">📩</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARTA PANTALLA COMPLETA -->
+    <div class="letter-full" id="letterFull">
+        <h1>Feliz cumpleaños Corazón💕</h1>
+        <p>Quiero decirte que te amo muchísimo. Gracias a vos viví muchas cosas por primera vez, cosas que jamás imaginé sentir o experimentar, y eso tiene un valor enorme en mi corazón.</p>
+        <p>Aunque a veces tengamos discusiones o diferencias, nunca dejo de tenerte cariño. Sé que no somos perfectos, que ambos cometemos errores y que a veces fallamos… pero también sé que lo importante es tener la voluntad de mejorar, de crecer juntos y de no soltar la mano del otro en los momentos difíciles.</p>
+        <p>Estoy tan orgullosa de vos, de todo lo que lograste hasta ahora, del esfuerzo que ponés cada día. Sé que todo ese sacrificio un día va a tener su recompensa —va a llegar desde arriba, cuando sea el momento justo.</p>
+        <p>Espero que te guste esta carta digital. Gracias por ser parte de mi vida.</p>
+        <footer>
+            Con cariño,<br />
+            💕 Tu novia<br /><br />
+            
+        </footer>
+    </div>
+
+    <script>
+        const envelopeInner = document.getElementById('envelopeInner');
+        const envelope = document.getElementById('envelope');
+        const letterFull = document.getElementById('letterFull');
+        let clickCount = 0;
+
+        envelope.addEventListener('click', () => {
+            clickCount++;
+            if (clickCount === 1) {
+                // Gira para mostrar la parte de frente
+                envelopeInner.style.transform = 'rotateY(0deg)';
+            } else if (clickCount === 2) {
+                // Ocultar sobre y mostrar carta con animación
+                envelope.style.display = 'none';
+                letterFull.classList.add('show');
+            }
+        });
+
+        // Cerrar carta (opcional)
+        letterFull.addEventListener('click', () => {
+            letterFull.classList.remove('show');
+            setTimeout(() => {
+                envelope.style.display = 'flex';
+                envelopeInner.style.transform = 'rotateY(180deg)';
+                clickCount = 0;
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
